@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81309F782932556700AF2027 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81309F772932556700AF2027 /* MovieDetail.swift */; };
+		81309F7B29325EE700AF2027 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81309F7A29325EE700AF2027 /* MovieService.swift */; };
+		81309F7D2932680A00AF2027 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81309F7C2932680A00AF2027 /* MovieCell.swift */; };
+		81309F8029326A9600AF2027 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81309F7F29326A9600AF2027 /* MovieView.swift */; };
 		8176A29329318D1500B52C15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A29229318D1500B52C15 /* AppDelegate.swift */; };
 		8176A29529318D1500B52C15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A29429318D1500B52C15 /* SceneDelegate.swift */; };
 		8176A29729318D1500B52C15 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A29629318D1500B52C15 /* ViewController.swift */; };
-		8176A29A29318D1500B52C15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8176A29829318D1500B52C15 /* Main.storyboard */; };
 		8176A29C29318D1700B52C15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8176A29B29318D1700B52C15 /* Assets.xcassets */; };
 		8176A29F29318D1700B52C15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8176A29D29318D1700B52C15 /* LaunchScreen.storyboard */; };
 		8176A2AA29318D1700B52C15 /* Desafio_DimensaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A2A929318D1700B52C15 /* Desafio_DimensaTests.swift */; };
 		8176A2B429318D1700B52C15 /* Desafio_DimensaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A2B329318D1700B52C15 /* Desafio_DimensaUITests.swift */; };
 		8176A2B629318D1700B52C15 /* Desafio_DimensaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A2B529318D1700B52C15 /* Desafio_DimensaUITestsLaunchTests.swift */; };
+		8176A2C42931900100B52C15 /* ViewCodableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A2C32931900100B52C15 /* ViewCodableProtocol.swift */; };
+		8176A2C6293191C200B52C15 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A2C5293191C200B52C15 /* HeaderCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,11 +41,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		81309F772932556700AF2027 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		81309F7A29325EE700AF2027 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
+		81309F7C2932680A00AF2027 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		81309F7F29326A9600AF2027 /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		8176A28F29318D1500B52C15 /* Desafio-Dimensa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Desafio-Dimensa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8176A29229318D1500B52C15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8176A29429318D1500B52C15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8176A29629318D1500B52C15 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8176A29929318D1500B52C15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8176A29B29318D1700B52C15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8176A29E29318D1700B52C15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8176A2A029318D1700B52C15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +57,8 @@
 		8176A2AF29318D1700B52C15 /* Desafio-DimensaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Desafio-DimensaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8176A2B329318D1700B52C15 /* Desafio_DimensaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Desafio_DimensaUITests.swift; sourceTree = "<group>"; };
 		8176A2B529318D1700B52C15 /* Desafio_DimensaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Desafio_DimensaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8176A2C32931900100B52C15 /* ViewCodableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodableProtocol.swift; sourceTree = "<group>"; };
+		8176A2C5293191C200B52C15 /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +86,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		81309F762932555900AF2027 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				81309F772932556700AF2027 /* MovieDetail.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		81309F7929325EDA00AF2027 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				81309F7A29325EE700AF2027 /* MovieService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		81309F7E29326A7400AF2027 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				81309F7F29326A9600AF2027 /* MovieView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		8176A28629318D1500B52C15 = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +133,13 @@
 		8176A29129318D1500B52C15 /* Desafio-Dimensa */ = {
 			isa = PBXGroup;
 			children = (
+				81309F7E29326A7400AF2027 /* Views */,
+				81309F7929325EDA00AF2027 /* Service */,
+				81309F762932555900AF2027 /* Models */,
+				8176A2C229318FE800B52C15 /* Components */,
 				8176A29229318D1500B52C15 /* AppDelegate.swift */,
 				8176A29429318D1500B52C15 /* SceneDelegate.swift */,
 				8176A29629318D1500B52C15 /* ViewController.swift */,
-				8176A29829318D1500B52C15 /* Main.storyboard */,
 				8176A29B29318D1700B52C15 /* Assets.xcassets */,
 				8176A29D29318D1700B52C15 /* LaunchScreen.storyboard */,
 				8176A2A029318D1700B52C15 /* Info.plist */,
@@ -125,6 +162,16 @@
 				8176A2B529318D1700B52C15 /* Desafio_DimensaUITestsLaunchTests.swift */,
 			);
 			path = "Desafio-DimensaUITests";
+			sourceTree = "<group>";
+		};
+		8176A2C229318FE800B52C15 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8176A2C32931900100B52C15 /* ViewCodableProtocol.swift */,
+				8176A2C5293191C200B52C15 /* HeaderCell.swift */,
+				81309F7C2932680A00AF2027 /* MovieCell.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +280,6 @@
 			files = (
 				8176A29F29318D1700B52C15 /* LaunchScreen.storyboard in Resources */,
 				8176A29C29318D1700B52C15 /* Assets.xcassets in Resources */,
-				8176A29A29318D1500B52C15 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +305,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8176A29729318D1500B52C15 /* ViewController.swift in Sources */,
+				8176A2C6293191C200B52C15 /* HeaderCell.swift in Sources */,
+				81309F7D2932680A00AF2027 /* MovieCell.swift in Sources */,
 				8176A29329318D1500B52C15 /* AppDelegate.swift in Sources */,
+				81309F8029326A9600AF2027 /* MovieView.swift in Sources */,
+				81309F782932556700AF2027 /* MovieDetail.swift in Sources */,
 				8176A29529318D1500B52C15 /* SceneDelegate.swift in Sources */,
+				8176A2C42931900100B52C15 /* ViewCodableProtocol.swift in Sources */,
+				81309F7B29325EE700AF2027 /* MovieService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +349,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8176A29829318D1500B52C15 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8176A29929318D1500B52C15 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8176A29D29318D1700B52C15 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -442,9 +486,9 @@
 				INFOPLIST_FILE = "Desafio-Dimensa/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -470,9 +514,9 @@
 				INFOPLIST_FILE = "Desafio-Dimensa/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
