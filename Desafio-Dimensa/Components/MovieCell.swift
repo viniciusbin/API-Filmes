@@ -10,8 +10,7 @@ import UIKit
     class MovieCell: UITableViewCell {
         
         static let identifier = "MovieCell"
-        
-        /// UI itens
+  
         lazy var movieImage: UIImageView = {
             let image = UIImageView()
             image.translatesAutoresizingMaskIntoConstraints  = false
@@ -43,11 +42,7 @@ import UIKit
             return label
         }()
     
-        
-        
-        
-        /// Init
-        
+ 
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             setupView()
@@ -58,19 +53,13 @@ import UIKit
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-        
-    
-        //MARK: - Internal API
-        
+  
         func configure(similarMovie: SimilarMovie) {
             title.numberOfLines = 0
             title.text = similarMovie.title
-            year.text = similarMovie.date
+            year.text = similarMovie.date.getInitialCharacters(4)
 //            genre.text = similarMovie.String(genres)
             movieImage.downloaded(from: ("https://image.tmdb.org/t/p/original\(similarMovie.posterPath ?? "")"))
-
-
-
 
         }
     }

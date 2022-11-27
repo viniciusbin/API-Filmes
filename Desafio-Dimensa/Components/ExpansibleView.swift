@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-// MARK: - Scretchy tableview header
     class ExpansibleView: UIView {
     public let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -32,22 +31,31 @@ import UIKit
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        createViews()
-        setViewConstraints()
+        setupView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    ///Creates subviews
-    private func createViews() {
+
+
+    public func scrollViewDidScroll(scrollView: UIScrollView) {
+        containerViewHeight.constant = scrollView.contentInset.top
+        let offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top)
+        containerView.clipsToBounds = offsetY <= 0
+        imageViewBottom.constant = offsetY >= 0 ? 0 : -offsetY / 2
+        imageViewHeight.constant = max(offsetY + scrollView.contentInset.top, scrollView.contentInset.top)
+    }
+}
+
+extension ExpansibleView: ViewCodable {
+    func buildHierarchy() {
         addSubview(containerView)
         containerView.addSubview(imageView)
         containerView.addSubview(gradientView)
     }
-    ///Constraints
-    private func setViewConstraints() {
+    
+    func setupConstraints() {
         NSLayoutConstraint.activate([
             widthAnchor.constraint(equalTo: containerView.widthAnchor),
             centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
@@ -71,16 +79,11 @@ import UIKit
             gradientView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
             gradientView.heightAnchor.constraint(equalTo: containerView.heightAnchor)
         ])
-        
-        
     }
     
-    /// Notify view of scroll change from container
-    public func scrollViewDidScroll(scrollView: UIScrollView) {
-        containerViewHeight.constant = scrollView.contentInset.top
-        let offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top)
-        containerView.clipsToBounds = offsetY <= 0
-        imageViewBottom.constant = offsetY >= 0 ? 0 : -offsetY / 2
-        imageViewHeight.constant = max(offsetY + scrollView.contentInset.top, scrollView.contentInset.top)
+    func applyAdditionalChanges() {
+        self.backgroundColor = .black
     }
+    
+    
 }

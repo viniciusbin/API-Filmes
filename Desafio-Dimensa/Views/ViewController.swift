@@ -10,8 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     var homeView: MovieView?
     var movieService = MovieService()
-    var movieDetail: MovieDetail?
-    var similarMovieDetail: SimilarMoviesList?
+    var viewModel = MovieDetailViewModel()
     
     override func loadView() {
         self.homeView = MovieView()
@@ -24,7 +23,7 @@ class ViewController: UIViewController {
                                                            height: view.frame.size.width))
         header.backgroundColor = .black
         
-        header.imageView.downloaded(from: "https://image.tmdb.org/t/p/original\(movieDetail?.poster_path ?? "")")
+        header.imageView.downloaded(from: "https://image.tmdb.org/t/p/original\(viewModel.movieDetail?.poster_path ?? "")")
         homeView?.setHeader(header: header)
         
     }
@@ -35,36 +34,11 @@ class ViewController: UIViewController {
         homeView?.tableView.delegate = self
         homeView?.tableView.dataSource = self
         navigationController?.navigationBar.isHidden = true
+        viewModel.delegate = self
+        viewModel.loadMovieInfo()
         
         
-        movieService.getMovieDetail { result in
-            DispatchQueue.main.async {
-                switch result {
-                    
-                case let .success(result):
-                    self.movieDetail = result
-                    self.homeView?.tableView.reloadData()
-                case let .failure(error):
-                    print(error)
-                }
-            }
-            
-        }
-        
-        movieService.getSimilarMovieDetail { result in
-            DispatchQueue.main.async {
-                switch result {
-                    
-                case let .success(result):
-                    self.similarMovieDetail = result
-                    self.homeView?.tableView.reloadData()
-                    print(self.similarMovieDetail?.movies[0])
-                    
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
+
         
     }
 }
@@ -73,7 +47,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderCell.identifier) as! HeaderCell
-        guard let movie = movieDetail else {return UITableViewCell()}
+        let movie = viewModel.movieDetailTransporter()
         header.configure(movieDetail: movie)
         return header
     }
@@ -83,15 +57,25 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return similarMovieDetail?.movies.count ?? 0
+        return viewModel.numberOfRows()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MovieCell.identifier, for: indexPath) as! MovieCell
-        guard let movieIndex = similarMovieDetail?.movies[indexPath.row] else {return UITableViewCell()}
-        cell.configure(similarMovie: movieIndex)
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell else {
+            return UITableViewCell()
+        }
+        
+        do {
+            let movieDetail = try viewModel.similarMovieIndex(indexPath.row)
+            cell.configure(similarMovie: movieDetail)
+        } catch {
+//            alert(title: "Opa!", message: error.localizedDescription)
+        }
+        
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
@@ -108,3 +92,13 @@ extension ViewController: UIScrollViewDelegate {
     }
 }
 
+extension ViewController: MovieDetailsProtocol {
+    func didGetData() {
+        homeView?.tableView.reloadData()
+    }
+    
+ 
+    
+    
+    
+}

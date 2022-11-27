@@ -10,9 +10,7 @@ import UIKit
 class HeaderCell: UITableViewHeaderFooterView {
     
     static let identifier = "HeaderCell"
-    
-    //MARK: - UI itens
-    
+        
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +67,6 @@ class HeaderCell: UITableViewHeaderFooterView {
         return button
     }()
     
-    //MARK: - INIT
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .black
@@ -81,15 +78,12 @@ class HeaderCell: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     public func configure(movieDetail: MovieDetail?) {
         titleLabel.text = movieDetail?.title
-        likesLabel.text = "\(movieDetail?.vote_count ?? 0)K Likes"
+        likesLabel.text = "\(movieDetail?.vote_count?.divideBy1000() ?? 0)K Likes"
         viewsLabel.text = "\(((movieDetail?.popularity ?? 0) * 10 ).rounded() / 10)K Views"
     }
     
-    
-    //MARK: - PRIVATE METHODS
     
     @objc
     private func likeButtonPressed() {
@@ -133,7 +127,6 @@ extension HeaderCell: ViewCodable {
     }
     
     func setupConstraints() {
-        ///title
          NSLayoutConstraint.activate([
              titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
              titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
