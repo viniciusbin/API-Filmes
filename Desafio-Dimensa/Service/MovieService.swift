@@ -26,7 +26,7 @@ class MovieService {
     }
     
     
-    func getUser(callback: @escaping(Result<MovieDetail, Error>) -> Void) {
+    func getMovieDetail(callback: @escaping(Result<MovieDetail, Error>) -> Void) {
     
         guard let url = movieUrl else {
             callback(.failure(ServiceError.invalidURL))
@@ -45,7 +45,7 @@ class MovieService {
                             }
                             
                             callback(.success(movieDetailSucess))
-                            print(movieDetailSucess)
+                            
                         } catch {
                             callback(.failure(ServiceError.decodeFail(error)))
                         }
@@ -53,30 +53,31 @@ class MovieService {
                     task.resume()
                 }
     
-//    func getRepo(gitUser: String, callback: @escaping(Result<[Repo], Error>) -> Void) {
-//
-//        guard let url = URL(string: baseURL + gitUser + "/repos") else {
-//            callback(.failure(ServiceError.invalidURL))
-//            return
-//        }
-//           let task = URLSession.shared.dataTask(with: url) { data, response, error in
-//               guard let data = data else {
-//                   callback(.failure(ServiceError.network(error)))
-//                   return
-//               }
-//                        do {
-//                            let repo = try? JSONDecoder().decode([Repo].self, from: data)
-//                            guard let repo = repo else {
-//                                callback(.failure(ServiceError.noData))
-//                                return
-//                            }
-//
-//                            callback(.success(repo))
-//                            //print(repo)
-//                        } catch {
-//                            callback(.failure(ServiceError.decodeFail(error)))
-//                        }
-//                    }
-//                    task.resume()
-//                }
+    func getSimilarMovieDetail(callback: @escaping(Result<SimilarMoviesList, Error>) -> Void) {
+    
+        guard let url = similarMoviesURL else {
+            callback(.failure(ServiceError.invalidURL))
+            return
+        }
+           let task = URLSession.shared.dataTask(with: url) { data, response, error in
+               guard let data = data else {
+                   callback(.failure(ServiceError.network(error)))
+                   return
+               }
+                        do {
+                            let similarMovieDetail = try? JSONDecoder().decode(SimilarMoviesList.self, from: data)
+                            guard let similarMovieDetailSucess = similarMovieDetail else {
+                                callback(.failure(ServiceError.noData))
+                                return
+                            }
+                            
+                            callback(.success(similarMovieDetailSucess))
+//                            print(similarMovieDetailSucess)
+                        } catch {
+                            callback(.failure(ServiceError.decodeFail(error)))
+                        }
+                    }
+                    task.resume()
+                }
+    
     }

@@ -9,24 +9,38 @@ import UIKit
 
 class MovieView: UIView {
     
+    var expansibleView: ExpansibleView?
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(MovieCell.self, forCellReuseIdentifier: MovieCell.identifier)
         tableView.register(HeaderCell.self, forHeaderFooterViewReuseIdentifier: HeaderCell.identifier)
+        
         return tableView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        expansibleView?.backgroundColor = .black
         setupView()
+        
         
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    public func setHeader(header: UIView ) {
 
+        tableView.tableHeaderView = header
+        tableView.reloadData()
+    }
+
+    public func getHeader() -> UIView? {
+        tableView.tableHeaderView
+    }
    
 
 }

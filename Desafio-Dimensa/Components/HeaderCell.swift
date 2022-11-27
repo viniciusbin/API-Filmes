@@ -19,7 +19,7 @@ class HeaderCell: UITableViewHeaderFooterView {
         label.textColor = .white
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.text = "The Lord of the Rings: The Fellowship of the Ring "
+        label.text = "Teste "
         
         return label
     }()
@@ -82,6 +82,12 @@ class HeaderCell: UITableViewHeaderFooterView {
     }
     
     
+    public func configure(movieDetail: MovieDetail?) {
+        titleLabel.text = movieDetail?.title
+        likesLabel.text = "\(movieDetail?.vote_count ?? 0)K Likes"
+        viewsLabel.text = "\(((movieDetail?.popularity ?? 0) * 10 ).rounded() / 10)K Views"
+    }
+    
     
     //MARK: - PRIVATE METHODS
     
@@ -111,6 +117,8 @@ class HeaderCell: UITableViewHeaderFooterView {
             }
         }
     }
+    
+    
 }
 extension HeaderCell: ViewCodable {
     func buildHierarchy() {

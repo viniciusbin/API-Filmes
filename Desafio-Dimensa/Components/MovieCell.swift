@@ -62,17 +62,17 @@ import UIKit
     
         //MARK: - Internal API
         
-//        func configure(similarMovie: SimilarMovieDetail, delegate: MovieDetailViewModelDelegate) {
-//            title.numberOfLines = 0
-//            title.text = similarMovie.title
-//            year.text = similarMovie.year
-//            genre.text = similarMovie.genre
-//            movieImage.image = similarMovie.postImage?.image
-//
-//
-//
-//
-//        }
+        func configure(similarMovie: SimilarMovie) {
+            title.numberOfLines = 0
+            title.text = similarMovie.title
+            year.text = similarMovie.date
+//            genre.text = similarMovie.String(genres)
+            movieImage.downloaded(from: ("https://image.tmdb.org/t/p/original\(similarMovie.posterPath ?? "")"))
+
+
+
+
+        }
     }
 extension MovieCell: ViewCodable {
     func buildHierarchy() {
