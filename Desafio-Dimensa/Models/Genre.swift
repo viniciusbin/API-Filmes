@@ -16,3 +16,4 @@ struct Genre: Decodable {
 struct GenresList: Decodable {
     let genres: [Genre]
 }
+

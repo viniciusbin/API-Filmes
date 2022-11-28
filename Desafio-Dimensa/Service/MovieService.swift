@@ -19,10 +19,13 @@ class MovieService {
     private let movieId = 120
     private var movieUrl: URL?
     private var similarMoviesURL: URL?
+    private var genreURL: URL?
     
     init() {
         movieUrl = URL(string: "https://api.themoviedb.org/3/movie/\(movieId)?api_key=\(apiKey)&language=en-US")
         similarMoviesURL = URL(string: "https://api.themoviedb.org/3/movie/\(movieId)/similar?api_key=\(apiKey)&language=en-US&page=1")
+        genreURL = URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=20efa529960e79f1faeab7b31a072b75&language=en-US.")
+        
     }
     
     
@@ -72,7 +75,33 @@ class MovieService {
                             }
                             
                             callback(.success(similarMovieDetailSucess))
-//                            print(similarMovieDetailSucess)
+                        } catch {
+                            callback(.failure(ServiceError.decodeFail(error)))
+                        }
+                    }
+                    task.resume()
+                }
+    
+    func getGenres(callback: @escaping(Result<GenresList, Error>) -> Void) {
+    
+        guard let url = genreURL else {
+            callback(.failure(ServiceError.invalidURL))
+            return
+        }
+           let task = URLSession.shared.dataTask(with: url) { data, response, error in
+               guard let data = data else {
+                   callback(.failure(ServiceError.network(error)))
+                   return
+               }
+                        do {
+                            let genres = try? JSONDecoder().decode(GenresList.self, from: data)
+                            guard let genresSuccess = genres else {
+                                callback(.failure(ServiceError.noData))
+                                return
+                            }
+                            
+                            callback(.success(genresSuccess))
+                    
                         } catch {
                             callback(.failure(ServiceError.decodeFail(error)))
                         }
@@ -81,3 +110,5 @@ class MovieService {
                 }
     
     }
+
+// fazer generico

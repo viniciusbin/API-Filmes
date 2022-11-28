@@ -28,6 +28,8 @@ extension SimilarMovie {
         case genres = "genre_ids"
         case date = "release_date"
         
+        
+        
     }
 }
 

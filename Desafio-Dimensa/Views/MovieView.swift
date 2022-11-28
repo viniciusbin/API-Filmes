@@ -16,17 +16,18 @@ class MovieView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(MovieCell.self, forCellReuseIdentifier: MovieCell.identifier)
         tableView.register(HeaderCell.self, forHeaderFooterViewReuseIdentifier: HeaderCell.identifier)
+        tableView.backgroundColor = .black
         
         return tableView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        expansibleView?.backgroundColor = .black
         setupView()
         
         
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

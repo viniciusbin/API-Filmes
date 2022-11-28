@@ -11,8 +11,9 @@ import UIKit
     class ExpansibleView: UIView {
     public let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
+//        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleToFill
+        
         return imageView
     }()
     

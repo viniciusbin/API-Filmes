@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     var homeView: MovieView?
     var movieService = MovieService()
     var viewModel = MovieDetailViewModel()
+    var genreList: [Int: String] = [:]
     
     override func loadView() {
         self.homeView = MovieView()
@@ -20,8 +21,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         let header = ExpansibleView(frame: CGRect(x: 0, y: 0,
                                                            width: view.frame.size.width,
-                                                           height: view.frame.size.width))
-        header.backgroundColor = .black
+                                                           height: view.frame.size.height / 2))
         
         header.imageView.downloaded(from: "https://image.tmdb.org/t/p/original\(viewModel.movieDetail?.poster_path ?? "")")
         homeView?.setHeader(header: header)
@@ -30,15 +30,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .black
         homeView?.tableView.delegate = self
         homeView?.tableView.dataSource = self
         navigationController?.navigationBar.isHidden = true
         viewModel.delegate = self
-        viewModel.loadMovieInfo()
-        
-        
-
+        viewModel.loadMovieDetailInfo()
         
     }
 }
@@ -47,7 +44,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderCell.identifier) as! HeaderCell
-        let movie = viewModel.movieDetailTransporter()
+        let movie = viewModel.showMovieDetail()
         header.configure(movieDetail: movie)
         return header
     }
@@ -66,9 +63,25 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
+        
+        
+        if genreList.isEmpty {
+            viewModel.loadGenres()
+        }
+        
+        
         do {
             let movieDetail = try viewModel.similarMovieIndex(indexPath.row)
-            cell.configure(similarMovie: movieDetail)
+            GenreService.shared.genreList?.genres.forEach { genre in
+                self.genreList[genre.id] = genre.name
+            }
+            var formatedGenres = [String]()
+            movieDetail.genres.forEach { index in
+                    formatedGenres.append(genreList[index] ?? "")
+                }
+            var genreIndex = formatedGenres.joined(separator: ", ")
+            
+            cell.configure(similarMovie: movieDetail, genre: (genreIndex))
         } catch {
 //            alert(title: "Opa!", message: error.localizedDescription)
         }
@@ -93,6 +106,7 @@ extension ViewController: UIScrollViewDelegate {
 }
 
 extension ViewController: MovieDetailsProtocol {
+    
     func didGetData() {
         homeView?.tableView.reloadData()
     }

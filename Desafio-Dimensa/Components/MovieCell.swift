@@ -9,6 +9,10 @@ import UIKit
 
     class MovieCell: UITableViewCell {
         
+//        var viewModel: MovieDetailViewModel?
+        
+        var objectGenre: GenresList?
+        
         static let identifier = "MovieCell"
   
         lazy var movieImage: UIImageView = {
@@ -54,14 +58,15 @@ import UIKit
             fatalError("init(coder:) has not been implemented")
         }
   
-        func configure(similarMovie: SimilarMovie) {
+        func configure(similarMovie: SimilarMovie, genre: String) {
             title.numberOfLines = 0
             title.text = similarMovie.title
-            year.text = similarMovie.date.getInitialCharacters(4)
-//            genre.text = similarMovie.String(genres)
+            year.text = String(similarMovie.date.prefix(4))
+            self.genre.text = genre
             movieImage.downloaded(from: ("https://image.tmdb.org/t/p/original\(similarMovie.posterPath ?? "")"))
 
         }
+        
     }
 extension MovieCell: ViewCodable {
     func buildHierarchy() {
@@ -94,4 +99,3 @@ extension MovieCell: ViewCodable {
     
     
 }
-
