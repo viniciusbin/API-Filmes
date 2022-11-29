@@ -31,7 +31,6 @@ class MovieDetailViewModel {
                     
                 case let .success(result):
                     self.movieDetail = result
-                    self.delegate?.didGetData()
                     self.loadSimilarMoviesInfo()
                     
                 case let .failure(error):
@@ -48,7 +47,6 @@ class MovieDetailViewModel {
                     
                 case let .success(result):
                     self.similarMovieDetail = result
-                    self.delegate?.didGetData()
                     self.loadGenres()
                     
                 case let .failure(error):

@@ -45,6 +45,13 @@ class MovieCell: UITableViewCell {
         return label
     }()
     
+    lazy var divisorLine: UIImageView = {
+        let line = UIImageView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = UIColor(red: 219.0/255.0, green: 219.0/255.0, blue: 219.0/255.0, alpha: 1.0)
+        return line
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
@@ -71,6 +78,7 @@ extension MovieCell: ViewCodable {
         contentView.addSubview(labelTitle)
         contentView.addSubview(labelYear)
         contentView.addSubview(labelGenre)
+        contentView.addSubview(divisorLine)
     }
     
     func setupConstraints() {
@@ -89,6 +97,11 @@ extension MovieCell: ViewCodable {
             
             labelGenre.leadingAnchor.constraint(equalTo: labelYear.trailingAnchor, constant: 8),
             labelGenre.centerYAnchor.constraint(equalTo: labelYear.centerYAnchor),
+            
+            divisorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            divisorLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            divisorLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 90),
+            divisorLine.heightAnchor.constraint(equalToConstant:  0.2)
         ])
     }
 }

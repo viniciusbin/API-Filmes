@@ -19,11 +19,13 @@ class MovieViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let header = ExpansibleView(frame: CGRect(x: 0, y: 0,
-                                                  width: view.frame.size.width,
-                                                  height: view.frame.size.height / 2))
-        header.imageView.downloaded(from: "https://image.tmdb.org/t/p/original\(viewModel.movieDetail?.poster_path ?? "")")
-        homeView?.setHeader(header: header)
+        DispatchQueue.main.async {
+            let header = ExpansibleView(frame: CGRect(x: 0, y: 0,
+                                                      width: self.view.frame.size.width,
+                                                      height: self.view.frame.size.height / 2))
+            header.imageView.downloaded(from: "https://image.tmdb.org/t/p/original\(self.viewModel.movieDetail?.poster_path ?? "")")
+            self.homeView?.setHeader(header: header)
+        }
     }
     
     override func viewDidLoad() {
