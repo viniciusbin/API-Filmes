@@ -10,15 +10,14 @@ import UIKit
 class HeaderCell: UITableViewHeaderFooterView {
     
     static let identifier = "HeaderCell"
-        
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.font = .systemFont(ofSize: 28, weight: .bold)
         label.text = "Teste "
-        
         return label
     }()
     
@@ -28,7 +27,6 @@ class HeaderCell: UITableViewHeaderFooterView {
         label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.text = "1.2K Likes"
-        
         return label
     }()
     
@@ -36,7 +34,6 @@ class HeaderCell: UITableViewHeaderFooterView {
         let icon = UIImageView()
         icon.image = UIImage(systemName: "heart.fill")
         icon.tintColor = .white
-        
         icon.translatesAutoresizingMaskIntoConstraints = false
         return icon
         
@@ -55,7 +52,6 @@ class HeaderCell: UITableViewHeaderFooterView {
         let icon = UIImageView()
         icon.image = UIImage(systemName: "play.tv.fill")
         icon.tintColor = .white
-        
         icon.translatesAutoresizingMaskIntoConstraints = false
         return icon
     }()
@@ -70,7 +66,6 @@ class HeaderCell: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .black
-        
         setupView()
     }
     
@@ -84,9 +79,7 @@ class HeaderCell: UITableViewHeaderFooterView {
         viewsLabel.text = "\(((movieDetail?.popularity ?? 0) * 10 ).rounded() / 10)K Views"
     }
     
-    
-    @objc
-    private func likeButtonPressed() {
+    @objc private func likeButtonPressed() {
         likeButton.isSelected = !likeButton.isSelected
         updateButtonState()
     }
@@ -104,17 +97,16 @@ class HeaderCell: UITableViewHeaderFooterView {
             if let image = UIImage(systemName: "heart.fill", withConfiguration: heartConfig) {
                 likeButton.setImage(image, for: .normal)
             }
-            
         } else {
             if let image = UIImage(systemName: "heart", withConfiguration: heartConfig) {
                 likeButton.setImage(image, for: .normal)
             }
         }
     }
-    
-    
 }
+
 extension HeaderCell: ViewCodable {
+    
     func buildHierarchy() {
         contentView.addSubview(likeButton)
         setupLikeButton()
@@ -127,34 +119,30 @@ extension HeaderCell: ViewCodable {
     }
     
     func setupConstraints() {
-         NSLayoutConstraint.activate([
-             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-             titleLabel.heightAnchor.constraint(equalToConstant: 45),
-             titleLabel.widthAnchor.constraint(equalToConstant: 300),
-         
-             likeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 18),
-             likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-             likeButton.heightAnchor.constraint(equalToConstant: 20),
-             likeButton.widthAnchor.constraint(equalToConstant: 25),
-         
-             likesLabel.leadingAnchor.constraint(equalTo: likesIcon.trailingAnchor, constant: 5),
-             likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant:  -10),
-             likesLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-             likesLabel.heightAnchor.constraint(equalToConstant: 35),
-        
-             likesIcon.centerYAnchor.constraint(equalTo: likesLabel.centerYAnchor),
-             likesIcon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-   
-             viewsLabel.centerYAnchor.constraint(equalTo: likesLabel.centerYAnchor),
-             viewsLabel.leadingAnchor.constraint(equalTo: viewsIcon.trailingAnchor,constant: 5),
-             viewsLabel.heightAnchor.constraint(equalToConstant: 35),
-      
-             viewsIcon.centerYAnchor.constraint(equalTo: likesLabel.centerYAnchor),
-             viewsIcon.leadingAnchor.constraint(equalTo: likesLabel.trailingAnchor, constant: 10)
-         ])
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            titleLabel.widthAnchor.constraint(equalToConstant: 300),
+            
+            likeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            likeButton.heightAnchor.constraint(equalToConstant: 20),
+            likeButton.widthAnchor.constraint(equalToConstant: 25),
+            
+            likesLabel.leadingAnchor.constraint(equalTo: likesIcon.trailingAnchor, constant: 5),
+            likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant:  -18),
+            likesLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            likesLabel.heightAnchor.constraint(equalToConstant: 35),
+            
+            likesIcon.centerYAnchor.constraint(equalTo: likesLabel.centerYAnchor),
+            likesIcon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            
+            viewsLabel.centerYAnchor.constraint(equalTo: likesLabel.centerYAnchor),
+            viewsLabel.leadingAnchor.constraint(equalTo: viewsIcon.trailingAnchor,constant: 5),
+            viewsLabel.heightAnchor.constraint(equalToConstant: 35),
+            
+            viewsIcon.centerYAnchor.constraint(equalTo: likesLabel.centerYAnchor),
+            viewsIcon.leadingAnchor.constraint(equalTo: likesLabel.trailingAnchor, constant: 10)
+        ])
     }
-    
-    
 }
-

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MovieViewController.swift
 //  Desafio-Dimensa
 //
 //  Created by Vinicius on 25/11/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MovieViewController: UIViewController {
     var homeView: MovieView?
     var movieService = MovieService()
     var viewModel = MovieDetailViewModel()
@@ -20,14 +20,12 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         let header = ExpansibleView(frame: CGRect(x: 0, y: 0,
-                                                           width: view.frame.size.width,
-                                                           height: view.frame.size.height / 2))
-        
+                                                  width: view.frame.size.width,
+                                                  height: view.frame.size.height / 2))
         header.imageView.downloaded(from: "https://image.tmdb.org/t/p/original\(viewModel.movieDetail?.poster_path ?? "")")
         homeView?.setHeader(header: header)
-        
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
@@ -36,11 +34,10 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         viewModel.delegate = self
         viewModel.loadMovieDetailInfo()
-        
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderCell.identifier) as! HeaderCell
@@ -62,41 +59,33 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell else {
             return UITableViewCell()
         }
-        
-        
-        
         if genreList.isEmpty {
             viewModel.loadGenres()
         }
-        
-        
         do {
             let movieDetail = try viewModel.similarMovieIndex(indexPath.row)
             GenreService.shared.genreList?.genres.forEach { genre in
                 self.genreList[genre.id] = genre.name
             }
-            var formatedGenres = [String]()
+            var stringGenres = [String]()
             movieDetail.genres.forEach { index in
-                    formatedGenres.append(genreList[index] ?? "")
-                }
-            var genreIndex = formatedGenres.joined(separator: ", ")
-            
+                stringGenres.append(genreList[index] ?? "")
+            }
+            let genreIndex = stringGenres.joined(separator: ", ")
             cell.configure(similarMovie: movieDetail, genre: (genreIndex))
         } catch {
-//            alert(title: "Opa!", message: error.localizedDescription)
+            print(error.localizedDescription)
         }
-        
         return cell
     }
-
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
     }
 }
 
-//MARK: - ScrollView Delegate
-extension ViewController: UIScrollViewDelegate {
+extension MovieViewController: UIScrollViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let header = homeView?.getHeader() as? ExpansibleView else {
             return
@@ -105,14 +94,9 @@ extension ViewController: UIScrollViewDelegate {
     }
 }
 
-extension ViewController: MovieDetailsProtocol {
+extension MovieViewController: MovieDetailsProtocol {
     
     func didGetData() {
         homeView?.tableView.reloadData()
     }
-    
- 
-    
-    
-    
 }

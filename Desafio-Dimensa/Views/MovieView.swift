@@ -17,15 +17,12 @@ class MovieView: UIView {
         tableView.register(MovieCell.self, forCellReuseIdentifier: MovieCell.identifier)
         tableView.register(HeaderCell.self, forHeaderFooterViewReuseIdentifier: HeaderCell.identifier)
         tableView.backgroundColor = .black
-        
         return tableView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        
-        
     }
     
     
@@ -34,16 +31,13 @@ class MovieView: UIView {
     }
     
     public func setHeader(header: UIView ) {
-
         tableView.tableHeaderView = header
         tableView.reloadData()
     }
-
+    
     public func getHeader() -> UIView? {
         tableView.tableHeaderView
     }
-   
-
 }
 
 extension MovieView: ViewCodable {
@@ -58,8 +52,5 @@ extension MovieView: ViewCodable {
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
-        
     }
-    
-    
 }

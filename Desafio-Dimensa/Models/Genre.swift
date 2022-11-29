@@ -8,12 +8,12 @@
 import Foundation
 
 struct Genre: Decodable {
+    
     let id: Int
     let name: String
 }
 
-
 struct GenresList: Decodable {
+    
     let genres: [Genre]
 }
-

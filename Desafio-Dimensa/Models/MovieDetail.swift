@@ -13,5 +13,3 @@ struct MovieDetail: Decodable {
     let vote_count: Int?
     let poster_path: String?
 }
-
-

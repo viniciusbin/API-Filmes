@@ -16,7 +16,7 @@ enum ServiceError: Error {
 class MovieService {
     
     private let apiKey = "20efa529960e79f1faeab7b31a072b75"
-    private let movieId = 120
+    private let movieId = 238
     private var movieUrl: URL?
     private var similarMoviesURL: URL?
     private var genreURL: URL?
@@ -28,87 +28,76 @@ class MovieService {
         
     }
     
-    
     func getMovieDetail(callback: @escaping(Result<MovieDetail, Error>) -> Void) {
-    
         guard let url = movieUrl else {
             callback(.failure(ServiceError.invalidURL))
             return
         }
-           let task = URLSession.shared.dataTask(with: url) { data, response, error in
-               guard let data = data else {
-                   callback(.failure(ServiceError.network(error)))
-                   return
-               }
-                        do {
-                            let movieDetail = try? JSONDecoder().decode(MovieDetail.self, from: data)
-                            guard let movieDetailSucess = movieDetail else {
-                                callback(.failure(ServiceError.noData))
-                                return
-                            }
-                            
-                            callback(.success(movieDetailSucess))
-                            
-                        } catch {
-                            callback(.failure(ServiceError.decodeFail(error)))
-                        }
-                    }
-                    task.resume()
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                callback(.failure(ServiceError.network(error)))
+                return
+            }
+            do {
+                let movieDetail = try? JSONDecoder().decode(MovieDetail.self, from: data)
+                guard let movieDetailSucess = movieDetail else {
+                    callback(.failure(ServiceError.noData))
+                    return
                 }
+                callback(.success(movieDetailSucess))
+            } catch {
+                callback(.failure(ServiceError.decodeFail(error)))
+            }
+        }
+        task.resume()
+    }
     
     func getSimilarMovieDetail(callback: @escaping(Result<SimilarMoviesList, Error>) -> Void) {
-    
+        
         guard let url = similarMoviesURL else {
             callback(.failure(ServiceError.invalidURL))
             return
         }
-           let task = URLSession.shared.dataTask(with: url) { data, response, error in
-               guard let data = data else {
-                   callback(.failure(ServiceError.network(error)))
-                   return
-               }
-                        do {
-                            let similarMovieDetail = try? JSONDecoder().decode(SimilarMoviesList.self, from: data)
-                            guard let similarMovieDetailSucess = similarMovieDetail else {
-                                callback(.failure(ServiceError.noData))
-                                return
-                            }
-                            
-                            callback(.success(similarMovieDetailSucess))
-                        } catch {
-                            callback(.failure(ServiceError.decodeFail(error)))
-                        }
-                    }
-                    task.resume()
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                callback(.failure(ServiceError.network(error)))
+                return
+            }
+            do {
+                let similarMovieDetail = try? JSONDecoder().decode(SimilarMoviesList.self, from: data)
+                guard let similarMovieDetailSucess = similarMovieDetail else {
+                    callback(.failure(ServiceError.noData))
+                    return
                 }
+                callback(.success(similarMovieDetailSucess))
+            } catch {
+                callback(.failure(ServiceError.decodeFail(error)))
+            }
+        }
+        task.resume()
+    }
     
     func getGenres(callback: @escaping(Result<GenresList, Error>) -> Void) {
-    
         guard let url = genreURL else {
             callback(.failure(ServiceError.invalidURL))
             return
         }
-           let task = URLSession.shared.dataTask(with: url) { data, response, error in
-               guard let data = data else {
-                   callback(.failure(ServiceError.network(error)))
-                   return
-               }
-                        do {
-                            let genres = try? JSONDecoder().decode(GenresList.self, from: data)
-                            guard let genresSuccess = genres else {
-                                callback(.failure(ServiceError.noData))
-                                return
-                            }
-                            
-                            callback(.success(genresSuccess))
-                    
-                        } catch {
-                            callback(.failure(ServiceError.decodeFail(error)))
-                        }
-                    }
-                    task.resume()
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                callback(.failure(ServiceError.network(error)))
+                return
+            }
+            do {
+                let genres = try? JSONDecoder().decode(GenresList.self, from: data)
+                guard let genresSuccess = genres else {
+                    callback(.failure(ServiceError.noData))
+                    return
                 }
-    
+                callback(.success(genresSuccess))
+            } catch {
+                callback(.failure(ServiceError.decodeFail(error)))
+            }
+        }
+        task.resume()
     }
-
-// fazer generico
+}

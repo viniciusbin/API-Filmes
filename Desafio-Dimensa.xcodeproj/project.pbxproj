@@ -20,7 +20,7 @@
 		813ECF832932EC480073F49F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813ECF822932EC480073F49F /* GradientView.swift */; };
 		8176A29329318D1500B52C15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A29229318D1500B52C15 /* AppDelegate.swift */; };
 		8176A29529318D1500B52C15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A29429318D1500B52C15 /* SceneDelegate.swift */; };
-		8176A29729318D1500B52C15 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A29629318D1500B52C15 /* ViewController.swift */; };
+		8176A29729318D1500B52C15 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A29629318D1500B52C15 /* MovieViewController.swift */; };
 		8176A29C29318D1700B52C15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8176A29B29318D1700B52C15 /* Assets.xcassets */; };
 		8176A29F29318D1700B52C15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8176A29D29318D1700B52C15 /* LaunchScreen.storyboard */; };
 		8176A2AA29318D1700B52C15 /* Desafio_DimensaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A2A929318D1700B52C15 /* Desafio_DimensaTests.swift */; };
@@ -63,7 +63,7 @@
 		8176A28F29318D1500B52C15 /* Desafio-Dimensa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Desafio-Dimensa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8176A29229318D1500B52C15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8176A29429318D1500B52C15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8176A29629318D1500B52C15 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8176A29629318D1500B52C15 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		8176A29B29318D1700B52C15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8176A29E29318D1700B52C15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8176A2A029318D1700B52C15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				81309F7F29326A9600AF2027 /* MovieView.swift */,
-				8176A29629318D1500B52C15 /* ViewController.swift */,
+				8176A29629318D1500B52C15 /* MovieViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -360,7 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8176A29729318D1500B52C15 /* ViewController.swift in Sources */,
+				8176A29729318D1500B52C15 /* MovieViewController.swift in Sources */,
 				8176A2C6293191C200B52C15 /* HeaderCell.swift in Sources */,
 				813ECF792932B4710073F49F /* SimilarMovie.swift in Sources */,
 				813ECF7B2932B92B0073F49F /* Genre.swift in Sources */,

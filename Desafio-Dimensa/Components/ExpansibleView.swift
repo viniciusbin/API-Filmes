@@ -8,17 +8,16 @@
 import Foundation
 import UIKit
 
-    class ExpansibleView: UIView {
-    public let imageView: UIImageView = {
+class ExpansibleView: UIView {
+    
+    lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-//        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleToFill
-        
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
-    
-    private let gradientView: GradientView = {
+    lazy var gradientView: GradientView = {
         let gradientView = GradientView()
         gradientView.translatesAutoresizingMaskIntoConstraints = false
         return gradientView
@@ -29,7 +28,6 @@ import UIKit
     private var containerView = UIView()
     private var containerViewHeight = NSLayoutConstraint()
     
-    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -38,8 +36,7 @@ import UIKit
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-
+    
     public func scrollViewDidScroll(scrollView: UIScrollView) {
         containerViewHeight.constant = scrollView.contentInset.top
         let offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top)
@@ -50,6 +47,7 @@ import UIKit
 }
 
 extension ExpansibleView: ViewCodable {
+    
     func buildHierarchy() {
         addSubview(containerView)
         containerView.addSubview(imageView)
@@ -64,7 +62,6 @@ extension ExpansibleView: ViewCodable {
         ])
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        
         containerView.widthAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
         containerViewHeight = containerView.heightAnchor.constraint(equalTo: self.heightAnchor)
         containerViewHeight.isActive = true
@@ -85,6 +82,4 @@ extension ExpansibleView: ViewCodable {
     func applyAdditionalChanges() {
         self.backgroundColor = .black
     }
-    
-    
 }

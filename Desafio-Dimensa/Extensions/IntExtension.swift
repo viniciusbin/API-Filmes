@@ -8,7 +8,8 @@
 import Foundation
 
 extension Int {
+    
     func divideBy1000() -> IntegerLiteralType{
-       (Int(self) / 100) / 10
+        (Int(self) / 100) / 10
     }
 }
