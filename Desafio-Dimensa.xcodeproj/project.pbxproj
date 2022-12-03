@@ -28,6 +28,7 @@
 		8176A2B629318D1700B52C15 /* Desafio_DimensaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A2B529318D1700B52C15 /* Desafio_DimensaUITestsLaunchTests.swift */; };
 		8176A2C42931900100B52C15 /* ViewCodableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A2C32931900100B52C15 /* ViewCodableProtocol.swift */; };
 		8176A2C6293191C200B52C15 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176A2C5293191C200B52C15 /* HeaderCell.swift */; };
+		8180D73B293B829C00B0730F /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8180D73A293B829C00B0730F /* Alert.swift */; };
 		81F615C92935021700DE9A25 /* GenreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F615C82935021700DE9A25 /* GenreService.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		8176A2B529318D1700B52C15 /* Desafio_DimensaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Desafio_DimensaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8176A2C32931900100B52C15 /* ViewCodableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodableProtocol.swift; sourceTree = "<group>"; };
 		8176A2C5293191C200B52C15 /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
+		8180D73A293B829C00B0730F /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		81F615C82935021700DE9A25 /* GenreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +161,7 @@
 			children = (
 				813ECF7D2932C0B50073F49F /* ImageViewExtension.swift */,
 				81313E4C2933DCD500C4972E /* IntExtension.swift */,
+				8180D73A293B829C00B0730F /* Alert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8180D73B293B829C00B0730F /* Alert.swift in Sources */,
 				8176A29729318D1500B52C15 /* MovieViewController.swift in Sources */,
 				8176A2C6293191C200B52C15 /* HeaderCell.swift in Sources */,
 				813ECF792932B4710073F49F /* SimilarMovie.swift in Sources */,

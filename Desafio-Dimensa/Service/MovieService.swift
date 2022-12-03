@@ -13,6 +13,7 @@ enum ServiceError: Error {
     case noData
 }
 
+
 class MovieService {
     
     private let apiKey = "20efa529960e79f1faeab7b31a072b75"
@@ -28,6 +29,7 @@ class MovieService {
         
     }
     
+    
     func getMovieDetail(callback: @escaping(Result<MovieDetail, Error>) -> Void) {
         guard let url = movieUrl else {
             callback(.failure(ServiceError.invalidURL))
@@ -39,15 +41,12 @@ class MovieService {
                 return
             }
             do {
-                let movieDetail = try? JSONDecoder().decode(MovieDetail.self, from: data)
-                guard let movieDetailSucess = movieDetail else {
-                    callback(.failure(ServiceError.noData))
-                    return
-                }
-                callback(.success(movieDetailSucess))
-            } catch {
+                let movieDetail = try JSONDecoder().decode(MovieDetail.self, from: data)
+                callback(.success(movieDetail))
+            } catch let error {
                 callback(.failure(ServiceError.decodeFail(error)))
             }
+            
         }
         task.resume()
     }
@@ -64,13 +63,9 @@ class MovieService {
                 return
             }
             do {
-                let similarMovieDetail = try? JSONDecoder().decode(SimilarMoviesList.self, from: data)
-                guard let similarMovieDetailSucess = similarMovieDetail else {
-                    callback(.failure(ServiceError.noData))
-                    return
-                }
-                callback(.success(similarMovieDetailSucess))
-            } catch {
+                let similarMovieDetail = try JSONDecoder().decode(SimilarMoviesList.self, from: data)
+                callback(.success(similarMovieDetail))
+            } catch let error {
                 callback(.failure(ServiceError.decodeFail(error)))
             }
         }
@@ -88,13 +83,9 @@ class MovieService {
                 return
             }
             do {
-                let genres = try? JSONDecoder().decode(GenresList.self, from: data)
-                guard let genresSuccess = genres else {
-                    callback(.failure(ServiceError.noData))
-                    return
-                }
-                callback(.success(genresSuccess))
-            } catch {
+                let genres = try JSONDecoder().decode(GenresList.self, from: data)
+                callback(.success(genres))
+            } catch let error {
                 callback(.failure(ServiceError.decodeFail(error)))
             }
         }

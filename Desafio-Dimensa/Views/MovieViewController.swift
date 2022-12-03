@@ -12,6 +12,7 @@ class MovieViewController: UIViewController {
     var movieService = MovieService()
     var viewModel = MovieDetailViewModel()
     var genreList: [Int: String] = [:]
+    var alert: Alert?
     
     override func loadView() {
         self.homeView = MovieView()
@@ -36,6 +37,7 @@ class MovieViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         viewModel.delegate = self
         viewModel.loadMovieDetailInfo()
+        alert = Alert(controller: self)
     }
 }
 
@@ -66,15 +68,17 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
         }
         do {
             let movieDetail = try viewModel.similarMovieIndex(indexPath.row)
+        
             GenreService.shared.genreList?.genres.forEach { genre in
                 self.genreList[genre.id] = genre.name
+
             }
             var stringGenres = [String]()
-            movieDetail.genres.forEach { index in
-                stringGenres.append(genreList[index] ?? "")
+            movieDetail.genres.forEach { id in
+                stringGenres.append(genreList[id] ?? "")
             }
             let genreIndex = stringGenres.joined(separator: ", ")
-            cell.configure(similarMovie: movieDetail, genre: (genreIndex))
+            cell.configure(similarMovie: movieDetail, genre: genreIndex)
         } catch {
             print(error.localizedDescription)
         }
@@ -97,6 +101,11 @@ extension MovieViewController: UIScrollViewDelegate {
 }
 
 extension MovieViewController: MovieDetailsProtocol {
+    
+    func presentError(error: Error) {
+        alert?.callAlert(title: "Atenção", message: "Erro na requisição, tente novamente!", completion: nil)
+    }
+    
     
     func didGetData() {
         homeView?.tableView.reloadData()

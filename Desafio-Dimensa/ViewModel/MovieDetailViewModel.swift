@@ -13,6 +13,7 @@ enum MovieDetailViewModelError: Error {
 
 protocol MovieDetailsProtocol: AnyObject {
     func didGetData()
+    func presentError(error: Error)
 }
 
 class MovieDetailViewModel {
@@ -24,6 +25,8 @@ class MovieDetailViewModel {
     var genreList: GenresList?
     public var delegate: MovieDetailsProtocol?
     
+    
+    
     func loadMovieDetailInfo() {
         movieService.getMovieDetail { result in
             DispatchQueue.main.async {
@@ -32,9 +35,9 @@ class MovieDetailViewModel {
                 case let .success(result):
                     self.movieDetail = result
                     self.loadSimilarMoviesInfo()
-                    
+                  
                 case let .failure(error):
-                    print(error)
+                    self.delegate?.presentError(error: error)
                 }
             }
         }
@@ -50,7 +53,7 @@ class MovieDetailViewModel {
                     self.loadGenres()
                     
                 case let .failure(error):
-                    print(error)
+                    self.delegate?.presentError(error: error)
                 }
             }
         }
@@ -66,7 +69,7 @@ class MovieDetailViewModel {
                     self.delegate?.didGetData()
                     
                 case let .failure(error):
-                    print(error)
+                    self.delegate?.presentError(error: error)
                 }
             }
         }
