@@ -68,6 +68,7 @@ class MovieDetailViewModel {
                     GenreService.shared.genreList = result
                     self.delegate?.didGetData()
                     
+                    
                 case let .failure(error):
                     self.delegate?.presentError(error: error)
                 }

@@ -59,13 +59,12 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell else {
             return UITableViewCell()
         }
-        if genreList.isEmpty {
-            viewModel.loadGenres()
-        }
+
         do {
             let movieDetail = try viewModel.similarMovieIndex(indexPath.row)
         
@@ -78,7 +77,8 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
                 stringGenres.append(genreList[id] ?? "")
             }
             let genreIndex = stringGenres.joined(separator: ", ")
-            cell.configure(similarMovie: movieDetail, genre: genreIndex)
+                cell.configure(similarMovie: movieDetail, genre: genreIndex)
+            print("configure na controller")
         } catch {
             print(error.localizedDescription)
         }
@@ -109,5 +109,6 @@ extension MovieViewController: MovieDetailsProtocol {
     
     func didGetData() {
         homeView?.tableView.reloadData()
+        print("reload data chamado")
     }
 }

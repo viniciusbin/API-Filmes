@@ -24,6 +24,7 @@ class MovieCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 18, weight: .medium)
         label.text = "Filme Similar"
+        label.numberOfLines = 0
         return label
     }()
     
@@ -63,11 +64,17 @@ class MovieCell: UITableViewCell {
     }
     
     func configure(similarMovie: SimilarMovie, genre: String) {
-        labelTitle.numberOfLines = 0
         labelTitle.text = similarMovie.title
         labelYear.text = String(similarMovie.date.prefix(4))
-        self.labelGenre.text = genre
+        labelGenre.text = genre
         movieImage.downloaded(from: ("https://image.tmdb.org/t/p/original\(similarMovie.posterPath ?? "")"))
+        print("configure na celula")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        movieImage.image = UIImage()
+        
     }
 }
 
