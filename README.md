@@ -4,8 +4,10 @@ Aplicativo baseado na API TheMovieDB.
 
 (Tela utilizada na réplica)
 
+  (Resultado final)
   
 ![Captura de Tela 2022-11-28 às 21 11 56](https://user-images.githubusercontent.com/107441911/204407205-904c066d-ce87-427e-a543-e6148de5d262.png)
+
 Arquitetura usada foi o MVVM, os dados do filme e a lista de filmes similares são obtidos nos endpoints da API. Utilizei todos os frameworks nativos para requisição da API, autolayout e componentização. 
   
   Considerações finais.
