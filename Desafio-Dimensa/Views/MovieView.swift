@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol MovieViewProtocol: AnyObject {
+    func updateData()
+}
+
 class MovieView: UIView {
     
     var expansibleView: ExpansibleView?
+    public var delegate: MovieViewProtocol?
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -30,13 +35,17 @@ class MovieView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     public func setHeader(header: UIView ) {
-        tableView.tableHeaderView = header
-        tableView.reloadData()
+        
+            self.tableView.tableHeaderView = header
+        delegate?.updateData()
+        
     }
     
     public func getHeader() -> UIView? {
-        tableView.tableHeaderView
+        return tableView.tableHeaderView
+        
     }
 }
 

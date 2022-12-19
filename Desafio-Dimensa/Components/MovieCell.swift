@@ -68,7 +68,6 @@ class MovieCell: UITableViewCell {
         labelYear.text = String(similarMovie.date.prefix(4))
         labelGenre.text = genre
         movieImage.downloaded(from: ("https://image.tmdb.org/t/p/original\(similarMovie.posterPath ?? "")"))
-        print("configure na celula")
     }
     
     override func prepareForReuse() {

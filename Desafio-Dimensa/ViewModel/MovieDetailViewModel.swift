@@ -27,13 +27,14 @@ class MovieDetailViewModel {
     
     
     
-    func loadMovieDetailInfo() {
+    func loadMovieDetailInfo(callback: @escaping() -> Void) {
         movieService.getMovieDetail { result in
             DispatchQueue.main.async {
                 switch result {
                     
                 case let .success(result):
                     self.movieDetail = result
+                    callback()
                     self.loadSimilarMoviesInfo()
                   
                 case let .failure(error):
@@ -87,7 +88,10 @@ class MovieDetailViewModel {
         return similarMovie.movies[index]
     }
     
-    func showMovieDetail() -> MovieDetail? {
+    func showMovieDetail() throws -> MovieDetail? {
+        guard let movieDetail = movieDetail else {
+            throw MovieDetailViewModelError.runtimeError("Erro ao obter dados! Tente novamente.")
+        }
         return movieDetail
     }
 }

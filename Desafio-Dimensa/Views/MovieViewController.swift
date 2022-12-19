@@ -20,23 +20,31 @@ class MovieViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        DispatchQueue.main.async {
-            let header = ExpansibleView(frame: CGRect(x: 0, y: 0,
-                                                      width: self.view.frame.size.width,
-                                                      height: self.view.frame.size.height / 2))
-            header.imageView.downloaded(from: "https://image.tmdb.org/t/p/original\(self.viewModel.movieDetail?.poster_path ?? "")")
-            self.homeView?.setHeader(header: header)
-        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
+        homeView?.delegate = self
         view.backgroundColor = .black
         homeView?.tableView.delegate = self
         homeView?.tableView.dataSource = self
         navigationController?.navigationBar.isHidden = true
-        viewModel.delegate = self
-        viewModel.loadMovieDetailInfo()
+        
+        viewModel.loadMovieDetailInfo {
+            let header = ExpansibleView(frame: CGRect(x: 0, y: 0,
+                                                      width: self.view.frame.size.width,
+                                                      height: self.view.frame.size.height / 2))
+            do {
+                let movieDetail = try self.viewModel.showMovieDetail()
+                header.imageView.downloaded(from: "https://image.tmdb.org/t/p/original\(movieDetail?.poster_path ??  "sofa.fill")")
+                
+                self.homeView?.setHeader(header: header)
+            } catch {
+                print(error)
+            }
+        }
         alert = Alert(controller: self)
     }
 }
@@ -45,8 +53,13 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderCell.identifier) as! HeaderCell
-        let movie = viewModel.showMovieDetail()
-        header.configure(movieDetail: movie)
+        do {
+            let movie = try viewModel.showMovieDetail()
+            header.configure(movieDetail: movie)
+        } catch {
+            print((error))
+        }
+        
         return header
     }
     
@@ -64,21 +77,21 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell else {
             return UITableViewCell()
         }
-
+        
         do {
             let movieDetail = try viewModel.similarMovieIndex(indexPath.row)
-        
+            
             GenreService.shared.genreList?.genres.forEach { genre in
                 self.genreList[genre.id] = genre.name
-
+                
             }
             var stringGenres = [String]()
             movieDetail.genres.forEach { id in
                 stringGenres.append(genreList[id] ?? "")
             }
             let genreIndex = stringGenres.joined(separator: ", ")
-                cell.configure(similarMovie: movieDetail, genre: genreIndex)
-            print("configure na controller")
+            cell.configure(similarMovie: movieDetail, genre: genreIndex)
+            
         } catch {
             print(error.localizedDescription)
         }
@@ -93,10 +106,12 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
 extension MovieViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let header = homeView?.getHeader() as? ExpansibleView else {
+        
+        guard let header = self.homeView?.getHeader() as? ExpansibleView else {
             return
         }
-        header.scrollViewDidScroll(scrollView: homeView?.tableView ?? UIScrollView())
+        header.scrollViewDidScroll(scrollView: self.homeView?.tableView ?? UIScrollView())
+        
     }
 }
 
@@ -109,6 +124,15 @@ extension MovieViewController: MovieDetailsProtocol {
     
     func didGetData() {
         homeView?.tableView.reloadData()
-        print("reload data chamado")
+        
     }
 }
+
+extension MovieViewController: MovieViewProtocol {
+    func updateData() {
+        homeView?.tableView.reloadData()
+    }
+    
+    
+}
+
